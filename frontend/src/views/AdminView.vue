@@ -6,8 +6,7 @@
       <h3 class="text-xl font-semibold">{{ ticket.title }}</h3>
       <p class="text-sm text-gray-600">
         Prijavio {{ ticket.createdBy }} | IP: {{ ticket.ipAddress }} |
-        Napravljeno:
-        {{ new Date(ticket.createdAt).toLocaleString() }}
+        Napravljeno: {{ new Date(ticket.createdAt).toLocaleString() }}
       </p>
       <p class="mt-2">{{ ticket.description }}</p>
 
@@ -53,17 +52,73 @@
         </ul>
       </div>
     </div>
+
+    <!-- Pagination Controls -->
+    <div class="mt-8 flex justify-center gap-4">
+      <button
+        @click="prevPage"
+        :disabled="page === 1"
+        class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+      >
+        ⬅️ Prethodna
+      </button>
+      <span class="text-sm text-gray-600 self-center">
+        Stranica {{ page }} od {{ totalPages }}
+      </span>
+      <button
+        @click="nextPage"
+        :disabled="page === totalPages"
+        class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+      >
+        Sledeća ➡️
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, watch, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
 
 const tickets = ref([]);
+const page = ref(parseInt(route.query.page) || 1);
+const totalPages = ref(1);
 
 const fetchTickets = async () => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tickets`);
-  tickets.value = (await res.json()).map((t) => ({ ...t, newComment: "" }));
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/tickets?page=${page.value}&limit=5`
+  );
+  const result = await res.json();
+
+  tickets.value = result.data.map((t) => ({ ...t, newComment: "" }));
+  totalPages.value = result.pages;
+};
+
+watch(
+  () => route.query.page,
+  (newPage) => {
+    page.value = parseInt(newPage) || 1;
+    fetchTickets();
+  }
+);
+
+const goToPage = (newPage) => {
+  router.push({ query: { page: newPage } });
+};
+
+const nextPage = () => {
+  if (page.value < totalPages.value) {
+    goToPage(page.value + 1);
+  }
+};
+
+const prevPage = () => {
+  if (page.value > 1) {
+    goToPage(page.value - 1);
+  }
 };
 
 const updateTicket = async (ticket) => {
@@ -99,3 +154,4 @@ const updateTicket = async (ticket) => {
 
 onMounted(fetchTickets);
 </script>
+

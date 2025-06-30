@@ -4,8 +4,26 @@ import Ticket from "../models/Ticket.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const tickets = await Ticket.find().sort({ createdAt: -1 });
-  res.json(tickets);
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  try {
+    const total = await Ticket.countDocuments();
+    const tickets = await Ticket.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.json({
+      data: tickets,
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch tickets" });
+  }
 });
 
 router.get("/by-ip", async (req, res) => {
