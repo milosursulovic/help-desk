@@ -6,12 +6,12 @@
       Status: <strong>{{ ticket.status }}</strong>
     </p>
     <p class="mb-4 text-sm text-gray-500">
-      By {{ ticket.createdBy }} | Created
+      Prijavio {{ ticket.createdBy }} | Napravljeno
       {{ new Date(ticket.createdAt).toLocaleString() }}
     </p>
 
     <div v-if="ticket.comments?.length">
-      <h3 class="font-semibold mb-2">💬 Comments</h3>
+      <h3 class="font-semibold mb-2">💬 Komentari</h3>
       <div
         v-for="(c, i) in ticket.comments"
         :key="i"

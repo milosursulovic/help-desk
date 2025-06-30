@@ -1,27 +1,27 @@
 <template>
   <form @submit.prevent="submitTicket" class="bg-white p-6 rounded shadow">
-    <h2 class="text-xl font-semibold mb-4">📨 Submit a Ticket</h2>
+    <h2 class="text-xl font-semibold mb-4">📨 Prijavi problem</h2>
 
     <input
       v-model="title"
-      placeholder="Title"
+      placeholder="Naslov"
       class="w-full border border-gray-300 rounded p-2 mb-3"
       required
     />
     <textarea
       v-model="description"
-      placeholder="Description"
+      placeholder="Opis"
       class="w-full border border-gray-300 rounded p-2 mb-3"
     />
     <input
       v-model="createdBy"
-      placeholder="Your Name"
+      placeholder="Vaše ime"
       class="w-full border border-gray-300 rounded p-2 mb-3"
       required
     />
 
     <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-      Submit
+      Pošalji
     </button>
   </form>
 </template>
