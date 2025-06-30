@@ -27,7 +27,8 @@
     </main>
 
     <footer class="text-center text-sm text-gray-500 py-4 border-t">
-      &copy; {{ new Date().getFullYear() }} Bolnički sistem
+      <div>&copy; {{ new Date().getFullYear() }} Bolnički sistem</div>
+      <div class="mt-1 text-xs text-gray-400">Verzija: {{ appVersion }}</div>
     </footer>
   </div>
 </template>
@@ -38,6 +39,8 @@ import { useRouter } from "vue-router";
 
 const isAuthenticated = ref(false);
 const router = useRouter();
+
+const appVersion = import.meta.env.VITE_APP_VERSION;
 
 const checkAuth = () => {
   isAuthenticated.value = !!localStorage.getItem("adminToken");
