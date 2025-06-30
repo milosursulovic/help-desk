@@ -32,12 +32,12 @@ const ticket = ref({});
 
 onMounted(async () => {
   const res = await fetch(
-    `${import.meta.env.VITE_API_URL}/api/tickets/${route.params.id}`,
+    `${import.meta.env.VITE_API_URL}/api/tickets/${route.params.id}`
   );
   if (res.ok) {
     ticket.value = await res.json();
   } else {
-    alert("Ticket not found");
+    alert("Tiket nije pronađen");
   }
 });
 </script>

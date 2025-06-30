@@ -5,7 +5,8 @@
     <div v-for="ticket in tickets" :key="ticket._id" class="border-t py-4">
       <h3 class="text-xl font-semibold">{{ ticket.title }}</h3>
       <p class="text-sm text-gray-600">
-        By {{ ticket.createdBy }} | IP: {{ ticket.ipAddress }} | Created:
+        Prijavio {{ ticket.createdBy }} | IP: {{ ticket.ipAddress }} |
+        Napravljeno:
         {{ new Date(ticket.createdAt).toLocaleString() }}
       </p>
       <p class="mt-2">{{ ticket.description }}</p>
@@ -13,18 +14,18 @@
       <div class="mt-2">
         <label class="font-medium mr-2">Status:</label>
         <select v-model="ticket.status" class="border rounded px-2 py-1">
-          <option>Open</option>
-          <option>In Progress</option>
-          <option>Resolved</option>
+          <option>Otvoren</option>
+          <option>U toku</option>
+          <option>Završen</option>
         </select>
       </div>
 
       <div class="mt-2">
-        <label class="font-medium mr-2">Add Comment:</label>
+        <label class="font-medium mr-2">Dodaj komentar:</label>
         <input
           v-model="ticket.newComment"
           class="border px-2 py-1 rounded w-2/3"
-          placeholder="Optional comment..."
+          placeholder="Komentar (opcionalno)..."
         />
       </div>
 
@@ -32,11 +33,11 @@
         @click="updateTicket(ticket)"
         class="mt-3 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
       >
-        💾 Save Changes
+        💾 Sačuvaj promene
       </button>
 
       <div v-if="ticket.comments?.length" class="mt-4 text-sm">
-        <p class="font-semibold mb-1">💬 Comments:</p>
+        <p class="font-semibold mb-1">💬 Komentari:</p>
         <ul>
           <li
             v-for="(c, idx) in ticket.comments"
@@ -89,10 +90,10 @@ const updateTicket = async (ticket) => {
     const updated = await res.json();
     ticket.status = updated.status;
     ticket.comments = updated.comments;
-    alert("✅ Ticket updated");
+    alert("✅ Tiket izmenjen");
   } else {
     const err = await res.json();
-    alert(`❌ Failed to update ticket: ${err.error}`);
+    alert(`❌ Neuspešna izmena tiketa: ${err.error}`);
   }
 };
 

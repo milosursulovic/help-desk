@@ -1,8 +1,5 @@
 <template>
-  <p v-if="tickets.length === 0" class="text-center text-gray-500">
-    No tickets submitted from this device.
-  </p>
-  <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     <TicketForm @submitted="fetchTickets" />
     <TicketList :tickets="tickets" />
   </div>

@@ -12,8 +12,8 @@ const ticketSchema = new mongoose.Schema(
     description: String,
     status: {
       type: String,
-      enum: ["Open", "In Progress", "Resolved"],
-      default: "Open",
+      enum: ["Otvoren", "U toku", "Završen"],
+      default: "Otvoren",
     },
     createdBy: String,
     ipAddress: String,

@@ -9,6 +9,7 @@ import ticketRoutes from "./routes/tickets.js";
 dotenv.config();
 
 const app = express();
+const host = process.env.HOST || "localhost";
 const port = process.env.PORT || 3000;
 
 const keyPath = process.env.SSL_KEY;
@@ -32,10 +33,8 @@ app.use("/api/tickets", ticketRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    https.createServer(sslOptions, app).listen(port, "localhost", () => {
-      console.log(
-        `🚀 Express HTTPS server running at https://localhost:${port}`
-      );
+    https.createServer(sslOptions, app).listen(port, host, () => {
+      console.log(`🚀 Express HTTPS server running at https://${host}:${port}`);
     });
   })
   .catch((err) => console.error("❌ MongoDB connection error:", err));

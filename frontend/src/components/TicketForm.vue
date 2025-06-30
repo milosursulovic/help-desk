@@ -55,7 +55,7 @@ const submitTicket = async () => {
     emit("submitted");
   } else {
     const err = await res.json();
-    alert(`Failed to submit ticket: ${err.error}`);
+    alert(`Neuspenšno dobavljanje tiketa: ${err.error}`);
   }
 };
 </script>
