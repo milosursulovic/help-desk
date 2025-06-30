@@ -2,9 +2,10 @@
   <div class="min-h-screen bg-slate-100">
     <header class="bg-white shadow p-4">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <h1 class="text-xl font-bold text-blue-700">
-          🏥 Bolnički Tiket Sistem
-        </h1>
+        <div class="flex items-center gap-2">
+          <img :src="Icon" alt="Ikona" class="w-6 h-6" />
+          <h1 class="text-xl font-bold text-blue-700">HelpDesk</h1>
+        </div>
 
         <div class="flex items-center gap-4">
           <router-link to="/" class="text-sm text-blue-600 hover:underline">
@@ -33,9 +34,11 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import Icon from "../assets/icons/helpdesk.png";
 
 const isAuthenticated = ref(false);
 const router = useRouter();
