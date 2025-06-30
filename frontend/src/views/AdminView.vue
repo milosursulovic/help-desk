@@ -97,7 +97,7 @@ const fetchTickets = async () => {
     `${import.meta.env.VITE_API_URL}/api/tickets?page=${page.value}&limit=5`,
     {
       headers: { Authorization: `Bearer ${token}` },
-    },
+    }
   );
   const result = await res.json();
 
@@ -110,7 +110,7 @@ watch(
   (newPage) => {
     page.value = parseInt(newPage) || 1;
     fetchTickets();
-  },
+  }
 );
 
 const goToPage = (newPage) => {
@@ -143,9 +143,12 @@ const updateTicket = async (ticket) => {
     `${import.meta.env.VITE_API_URL}/api/tickets/${ticket._id}`,
     {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(body),
-    },
+    }
   );
 
   if (res.ok) {
