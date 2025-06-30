@@ -1,14 +1,17 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <TicketForm @submitted="fetchTickets" />
-    <TicketList :tickets="tickets" />
-  </div>
+  <MainLayout>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <TicketForm @submitted="fetchTickets" />
+      <TicketList :tickets="tickets" />
+    </div>
+  </MainLayout>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import TicketForm from "../components/TicketForm.vue";
 import TicketList from "../components/TicketList.vue";
+import MainLayout from "../layout/MainLayout.vue";
 
 const tickets = ref([]);
 

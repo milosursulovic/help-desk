@@ -1,31 +1,39 @@
 <template>
-  <div class="max-w-sm mx-auto mt-20">
-    <h2 class="text-2xl font-bold mb-4">Admin Login</h2>
-    <input
-      v-model="username"
-      placeholder="Username"
-      class="w-full border border-gray-300 rounded p-2 mb-3"
-    />
+  <MainLayout :hideLogout="true">
+    <div class="max-w-sm mx-auto mt-20">
+      <h2 class="text-2xl font-bold mb-4 text-center">Admin Prijava</h2>
 
-    <input
-      v-model="password"
-      type="password"
-      placeholder="Password"
-      class="input mb-3"
-    />
-    <button
-      @click="login"
-      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-    >
-      🔐 Login
-    </button>
-    <p v-if="error" class="text-red-600 mt-2 text-sm">{{ error }}</p>
-  </div>
+      <input
+        v-model="username"
+        placeholder="Korisničko ime"
+        class="w-full border border-gray-300 rounded p-2 mb-3"
+      />
+
+      <input
+        v-model="password"
+        type="password"
+        placeholder="Lozinka"
+        class="w-full border border-gray-300 rounded p-2 mb-3"
+      />
+
+      <button
+        @click="login"
+        class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        🔐 Prijavi se
+      </button>
+
+      <p v-if="error" class="text-red-600 mt-2 text-sm text-center">
+        {{ error }}
+      </p>
+    </div>
+  </MainLayout>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import MainLayout from "../layout/MainLayout.vue";
 
 const username = ref("");
 const password = ref("");
@@ -47,7 +55,7 @@ const login = async () => {
     localStorage.setItem("adminToken", token);
     router.push("/admin");
   } else {
-    error.value = "Pogrešan username ili lozinka";
+    error.value = "Pogrešano korisničko ili lozinka";
   }
 };
 </script>
