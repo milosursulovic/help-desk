@@ -16,7 +16,14 @@ const ticketSchema = new mongoose.Schema(
       default: "Open",
     },
     createdBy: String,
-    comments: [commentSchema],
+    ipAddress: String,
+    comments: [
+      {
+        message: String,
+        timestamp: { type: Date, default: Date.now },
+        author: String,
+      },
+    ],
   },
   { timestamps: true }
 );

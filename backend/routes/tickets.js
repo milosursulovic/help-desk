@@ -8,10 +8,33 @@ router.get("/", async (req, res) => {
   res.json(tickets);
 });
 
+router.get("/by-ip", async (req, res) => {
+  const forwarded = req.headers["x-forwarded-for"];
+  const ip = forwarded ? forwarded.split(",")[0] : req.socket.remoteAddress;
+
+  try {
+    const tickets = await Ticket.find({ ipAddress: ip }).sort({
+      createdAt: -1,
+    });
+    res.json(tickets);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch tickets by IP" });
+  }
+});
+
 router.post("/", async (req, res) => {
   const { title, description, createdBy } = req.body;
+
+  const forwarded = req.headers["x-forwarded-for"];
+  const ip = forwarded ? forwarded.split(",")[0] : req.socket.remoteAddress;
+
   try {
-    const newTicket = new Ticket({ title, description, createdBy });
+    const newTicket = new Ticket({
+      title,
+      description,
+      createdBy,
+      ipAddress: ip,
+    });
     await newTicket.save();
     res.status(201).json(newTicket);
   } catch (err) {
