@@ -1,5 +1,5 @@
 <template>
-  <MainLayout :hideLogout="true">
+  <MainLayout>
     <div class="max-w-sm mx-auto mt-20">
       <h2 class="text-2xl font-bold mb-4 text-center">Admin Prijava</h2>
 

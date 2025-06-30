@@ -20,6 +20,11 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     { path: "/admin-login", name: "AdminLogin", component: AdminLogin },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () => import("@/views/NotFoundView.vue"),
+    },
   ],
 });
 
