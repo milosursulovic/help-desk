@@ -17,7 +17,7 @@
             @click="logout"
             class="text-sm text-white bg-red-600 px-4 py-1.5 rounded hover:bg-red-700"
           >
-            🚪 Logout
+            🚪 Odjavi se
           </button>
         </div>
       </div>
@@ -28,12 +28,14 @@
     </main>
 
     <footer class="text-center text-sm text-gray-500 py-4 border-t">
-      <div>&copy; {{ new Date().getFullYear() }} Bolnički sistem</div>
+      <div>
+        &copy; {{ new Date().getFullYear() }} Informacioni sistem Opšte bolnice
+        Bor
+      </div>
       <div class="mt-1 text-xs text-gray-400">Verzija: {{ appVersion }}</div>
     </footer>
   </div>
 </template>
-
 
 <script setup>
 import { ref, onMounted } from "vue";

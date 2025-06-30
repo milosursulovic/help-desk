@@ -34,6 +34,7 @@ const route = useRoute();
 const ticket = ref({});
 
 onMounted(async () => {
+  document.title = `Tiket - HelpDesk`;
   const res = await fetch(
     `${import.meta.env.VITE_API_URL}/api/tickets/${route.params.id}`,
   );

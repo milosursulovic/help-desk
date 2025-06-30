@@ -160,5 +160,8 @@ const updateTicket = async (ticket) => {
   }
 };
 
-onMounted(fetchTickets);
+onMounted(() => {
+  document.title = `Admin - HelpDesk`;
+  fetchTickets();
+});
 </script>

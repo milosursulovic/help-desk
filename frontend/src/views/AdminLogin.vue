@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import MainLayout from "../layout/MainLayout.vue";
 
@@ -58,4 +58,8 @@ const login = async () => {
     error.value = "Pogrešano korisničko ili lozinka";
   }
 };
+
+onMounted(() => {
+  document.title = `Admin Prijava - HelpDesk`;
+});
 </script>

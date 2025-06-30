@@ -21,5 +21,8 @@ const fetchTickets = async () => {
   tickets.value = data;
 };
 
-onMounted(fetchTickets);
+onMounted(() => {
+  document.title = `Početna - HelpDesk`;
+  fetchTickets();
+});
 </script>
