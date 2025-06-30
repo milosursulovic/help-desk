@@ -1,9 +1,10 @@
 import express from "express";
 import Ticket from "../models/Ticket.js";
+import { authenticateToken } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", authenticateToken, async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * limit;
@@ -69,7 +70,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authenticateToken, async (req, res) => {
   const { status, comment, author } = req.body;
   try {
     const ticket = await Ticket.findById(req.params.id);

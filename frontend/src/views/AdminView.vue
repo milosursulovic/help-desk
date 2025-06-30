@@ -87,9 +87,14 @@ const tickets = ref([]);
 const page = ref(parseInt(route.query.page) || 1);
 const totalPages = ref(1);
 
+const token = localStorage.getItem("adminToken");
+
 const fetchTickets = async () => {
   const res = await fetch(
-    `${import.meta.env.VITE_API_URL}/api/tickets?page=${page.value}&limit=5`
+    `${import.meta.env.VITE_API_URL}/api/tickets?page=${page.value}&limit=5`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
   );
   const result = await res.json();
 

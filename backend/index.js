@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import fs from "fs";
 import https from "https";
 import ticketRoutes from "./routes/tickets.js";
+import authRoutes from "./routes/auth.js";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/tickets", ticketRoutes);
+app.use("/api/auth", authRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
