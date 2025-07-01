@@ -17,7 +17,7 @@
             @click="logout"
             class="text-sm text-white bg-red-600 px-4 py-1.5 rounded hover:bg-red-700"
           >
-            🚪 Odjavi se
+            Odjavi se
           </button>
         </div>
       </div>
